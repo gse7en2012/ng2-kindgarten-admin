@@ -1,0 +1,45 @@
+@import 'assets/normalize.css';
+/* You can add global styles to this file, and also import other style files */
+body{font-family: 'microsoft yahei';background: #edeef2;font-size: 14px;color:#666;}
+h2{font-size: 18px;margin: 0;line-height: 2;color: #222;}
+p{margin:5px 0;line-height: 1.5;}
+table{border-collapse: collapse;width: 100%;}
+table td,table th{border:1px solid #ddd;padding: 10px;color:#666;font-size: 14px;}
+table th{background: #f5f6fa;color: #222;}
+
+.fl{float:left;}
+.fr{float: right;}
+.btn{display: inline-block;background: #60d296;color: #fff;border-radius: 5px;padding: 10px 14px;font-size: 14px;}
+.btn.sm{padding:7px 9px;margin: 0 3px;border-radius: 4px;}
+.btn.red{background: #ff6f6f;}
+.band{background: #a4cef6;padding:7px 9px;border-radius: 3px;color: #fff;}
+
+
+/*component*/
+.topbar-box{margin: 5px 0;text-align: right;}
+
+
+.search-box{
+    overflow: hidden;margin: 20px 5px;
+    .fr{margin-top: 3px;}
+    input{height: 32px;border: 1px solid #ddd;padding: 0 5px;outline: 0;}
+    select{width: 80px;height:32px;border: 1px solid #ddd;}
+    .search-btn {
+        display: inline-block;border: 1px solid #ddd;margin: 0px -5px;padding: 2px;text-align: center;width: 34px;height: 34px;box-sizing: border-box;position: relative;top: 6px;cursor: pointer;margin-top: -6px;
+        span{display: inline-block;width: 25px;height:25px;background:url('./assets/img/icon_list.png') no-repeat 0 -189px;position: relative;top: 2px; }
+    }
+}
+
+.result-box{
+    margin: 15px 0;
+    td{text-align: center;}
+    .footer{overflow: hidden;padding: 10px;border: 1px solid #ddd;border-top: 0;}
+    .page-item{
+        display: inline-block;cursor: pointer;width: 30px;height:30px;border-radius: 5px;line-height: 30px;border:1px solid #ccc;text-align: center;
+        &.cur{background: #3391e8;border-color:#3391e8;color:#fff;}
+        .arrow{display: inline-block;border: 6px solid transparent;border-left: 8px solid #7a7b7d;width: 0;height: 0px;font-size: 0;left:4px;position: relative;}
+    }
+    .prev{
+        .arrow{border-left: 6px solid transparent; border-right: 8px solid #7a7b7d;left:-4px;}
+    }
+}

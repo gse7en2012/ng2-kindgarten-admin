@@ -1,0 +1,14 @@
+.login-page{background:#fff url('../../assets/img/login_bg.jpg') no-repeat 50% 0;}
+.ctx{max-width: 1050px;margin: 0 auto;min-height: 900px;position: relative;}
+
+.form{width: 400px;position: absolute;right:5px;top:140px;border-radius: 5px;background: #fff;box-sizing: border-box;padding: 30px 38px;font-size: 12px;}
+.title{text-align: center;color: #555;font-size: 24px;line-height: 1.5;margin:10px;margin-bottom: 30px;font-weight: normal;}
+.form input{border:1px solid #ececec;background: none;outline: none;display: block;margin: 0;height: 50px;line-height: 50px;padding: 0 8px;width: 100%;font-size: 16px;}
+.form label{font-size: 14px;overflow: hidden;}
+.form label span{display: inline-block;margin-left: 5px;color: #555;}
+#box{margin: 20px 0;}
+#auto{width: auto;height: auto;display: inline-block;}
+#pass{margin-top: -1px;}
+
+.login-btn{display: block;margin-top: 25px;text-align: center;color: #fff;height:50px;line-height: 50px;border-radius: 5px;background: #3391e8;font-size: 20px;}
+

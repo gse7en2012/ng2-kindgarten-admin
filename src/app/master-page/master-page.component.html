@@ -1,0 +1,46 @@
+<div class="master-page">
+  <div class="top-header">
+    <div class="ctx">
+      PRG自组织员工管理后台
+      <div class="admin-info">
+        系统管理员 欧阳<span class="arrow"></span>
+      </div>
+    </div>
+
+  </div>
+  <div class="center-box">
+    <ul class="left-nav" [style.min-height]="navMinHeight">
+      <li>
+        <a [routerLink]="['/master/desktop']" routerLinkActive="cur"><i class="icon desktop"></i><span>我的桌面</span></a>
+      </li>
+      <li>
+        <a [routerLink]="['/master/employee']" routerLinkActive="cur"><i class="icon employee"></i>员工管理</a>
+      </li>
+      <li>
+        <a [routerLink]="['/master/growth']" routerLinkActive="cur"><i class="icon growth"></i>成长值记录</a>
+      </li>
+      <li>
+        <a [routerLink]="['/master/rank']" routerLinkActive="cur"><i class="icon rank"></i>排名查询</a>
+      </li>
+      <li>
+        <a [routerLink]="['/master/report']" routerLinkActive="cur"><i class="icon report"></i>月度报告</a>
+      </li>
+      <li>
+        <a (click)="toggleSubNav()"><i class="icon setting"></i>系统管理<i class="nav-arrow" [class.rotate]="!hideSubNav"></i></a>
+      </li>
+      <li [hidden]="hideSubNav"><a [routerLink]="['/master/manage/edu']" routerLinkActive="cur" class="sub-nav">学历管理</a></li>
+      <li [hidden]="hideSubNav"><a [routerLink]="['/master/manage/cert']" routerLinkActive="cur" class="sub-nav">证书管理</a></li>
+      <li [hidden]="hideSubNav"><a [routerLink]="['/master/manage/skill']" routerLinkActive="cur" class="sub-nav">技能管理</a></li>
+      <li [hidden]="hideSubNav"><a [routerLink]="['/master/manage/position']" routerLinkActive="cur" class="sub-nav">职位管理</a></li>
+      <li [hidden]="hideSubNav"><a [routerLink]="['/master/manage/department']" routerLinkActive="cur" class="sub-nav">部门管理</a></li>
+      <li [hidden]="hideSubNav"><a [routerLink]="['/master/manage/class']" routerLinkActive="cur" class="sub-nav">班组管理</a></li>
+      <li><a [routerLink]="['/master/discuss']" routerLinkActive="cur"><i class="icon discuss"></i>互动专区</a></li>
+
+
+
+    </ul>
+    <div class="dashboard" [style.min-height]="navMinHeight">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

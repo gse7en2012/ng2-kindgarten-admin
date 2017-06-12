@@ -1,0 +1,34 @@
+.top-header{position: absolute;height:50px;top:0;left:0;background: #3391e8;width: 100%;}
+.admin-info{float: right;font-size: 16px;margin-right: 20px;}
+.arrow{border: 6px solid transparent;border-top: 8px solid #f6f6f6;width: 0;height: 0px;font-size: 0;display: inline-block;position: relative;top: 5px;margin-left: 5px;}
+
+.ctx{max-width: 1200px;margin: 0 auto;font-size: 20px;line-height: 50px;padding-left: 10px;color: #f6f6f6;}
+
+.center-box{max-width: 1200px;margin:60px auto 0;overflow: hidden;}
+.left-nav{width: 220px;float: left;background: #f6f7fb;border:1px solid #ddd;margin: 0;list-style: none;box-sizing: border-box;padding-left: 0;border-bottom:0;}
+.left-nav li{height: 40px;line-height: 40px;font-size: 14px;cursor: pointer;}
+.left-nav li a{display: block;height:100%;color: #666;text-decoration: none;padding-left: 20px;}
+.left-nav li a.cur{background: #3391e8;color: #fff;position: relative;z-index: 10;margin: 0 -1px;padding-left: 21px;}
+.left-nav li .sub-nav{padding-left: 65px;}
+.left-nav li .sub-nav.cur{padding-left: 66px;}
+.dashboard{padding:10px 20px;padding-left: 240px;border:1px solid #ddd;border-left:0;background: #fff;box-sizing: border-box;}
+
+.nav-arrow{border: 6px solid transparent;border-left: 8px solid #7a7b7d;width: 0;height: 0px;font-size: 0;display: inline-block;position: relative;top: 0px;margin-left: 35px;transform-origin: 25% 50%;transition: all .12s ease-in-out;}
+.nav-arrow.rotate{transform: rotate(90deg)}
+
+.icon{display: inline-block;width: 25px;height: 25px;background: url('/assets/img/icon_list.png');position: relative;top: 7px;margin-right: 20px;}
+.icon.desktop{background-position: 0 0;}
+.icon.employee{background-position: 0 -27px;}
+.icon.growth{background-position: 0 -54px;}
+.icon.rank{background-position: 0 -81px;}
+.icon.report{background-position: 0 -108px;}
+.icon.setting{background-position: 0 -135px;}
+.icon.discuss{background-position: 0 -163px;}
+
+.cur .icon.desktop{background-position: -30px 0;}
+.cur .icon.employee{background-position: -30px -27px;}
+.cur .icon.growth{background-position: -30px -54px;}
+.cur .icon.rank{background-position: -30px -81px;}
+.cur .icon.report{background-position: -30px -108px;}
+.cur .icon.setting{background-position: -30px -135px;}
+.cur .icon.discuss{background-position:-30px -163px;}
