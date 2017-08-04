@@ -1,3 +1,58 @@
-<p>
-  rank works!
-</p>
+<div class="rank-page">
+
+  <div class="topbar-box">
+    <div class="fl">
+      <span>日期范围：</span>
+      <my-date-picker name="mydateStart" [options]="myDatePickerOptions" (dateChanged)="onStartDateChanged($event)" required></my-date-picker>
+      <span>至</span>
+      <my-date-picker name="mydateEnd" [options]="myDatePickerOptions" (dateChanged)="onEndDateChanged($event)" required></my-date-picker>
+    </div>
+  </div>
+
+  <div class="search-box">
+    <label>搜索：</label>
+    <input type="text" [(ngModel)]="keyword">
+    <a class="search-btn" (click)="searchRankList()"><span></span></a>
+
+    <div class="fr">显示
+      <select [(ngModel)]="pageSize" (change)="onChange($event.target.value)">
+        <option value="100">100</option>
+        <option value="80">80</option>
+        <option value="40">40</option>
+      </select> 条
+    </div>
+  </div>
+
+  <div class="result-box">
+    <table>
+      <tr>
+        <th>员工编号</th>
+        <th>员工姓名</th>
+        <th>头像</th>
+        <th>成长值</th>
+        <th>等级</th>
+      </tr>
+      <tr *ngIf="rankList.length==0">
+        <td colspan="5">没有搜索到对应结果</td>
+      </tr>
+      <tr *ngFor="let gv of rankList">
+        <td>{{gv.employee_id}}</td>
+        <td>{{gv.employee_name}}</td>
+        <td>{{gv.employee_head_imgurl}}</td>
+        <td>{{gv.growthvalue_sum_value}}</td>
+        <td>{{gv.employee_level}}</td>
+      </tr>
+    </table>
+    <div class="footer">
+      <div class="fl">显示{{startCount}}-{{endCount}}条，共{{rows}}条</div>
+      <div class="fr">
+        <div class="page">
+          <a class="prev page-item" (click)="prevPage()" [class.disabled]="!prevPageEnable"><span class="arrow"></span></a>
+          <a class="page-item" *ngFor="let p of pageButtons" [class.cur]="p.cur" (click)="jumpPage(p.num)">{{p.num}}</a>
+          <a class="next page-item" (click)="nextPage()" [class.disabled]="!nextPageEnable"><span class="arrow"></span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

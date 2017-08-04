@@ -1,0 +1,8 @@
+{
+  "/gm/**": {
+    "target": "http://localhost:8896/",
+    "pathRewrite": {
+      "^/gm": ""
+    }
+  }
+}

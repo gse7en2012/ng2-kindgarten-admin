@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, CanActivate, ActivatedRoute } from '@angular/router';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-master-page',
@@ -10,8 +11,9 @@ export class MasterPageComponent implements OnInit {
 
   public hideSubNav: boolean = true;
   public navMinHeight: string;
+  public adminInfo:any;
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(private activatedRoute: ActivatedRoute,private userService:UserService) { }
 
   ngOnInit() {
     this.setNavCurrent()
@@ -19,6 +21,7 @@ export class MasterPageComponent implements OnInit {
     this.activatedRoute.url.subscribe((params) => {
       console.log(params)
     });
+    this.adminInfo=this.userService.getAdminInfo();
   }
 
   toggleSubNav() {
@@ -27,11 +30,12 @@ export class MasterPageComponent implements OnInit {
 
   setNavCurrent() {
     const subNavSeed = ['edu', 'cert', 'skill', 'position', 'department', 'class'];
-    const path = window.location.pathname.split('/').reverse()[0];
+    const path=window.location.pathname;
 
-    if (subNavSeed.indexOf(path) !== -1) {
-      this.hideSubNav = false;
-    }
+    subNavSeed.forEach((item)=>{
+      if(path.indexOf(item)!=-1) this.hideSubNav=false;
+    })
+
   }
 
 }

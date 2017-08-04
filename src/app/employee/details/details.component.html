@@ -1,0 +1,70 @@
+<div class="employee-details-page">
+
+  <!-- <div class="topbar-box">
+    员工管理<span class="sub">&gt;{{title}}员工</span>
+  </div> -->
+  <div class="content-box">
+    <form class="form" #myForm="ngForm">
+      <div class="row" *ngIf="isEdit">
+        <label>员工编号</label>
+        <input type="text" placeholder="请输入名称" readonly [(ngModel)]="eid" name="eid" class="disabled">
+      </div>
+      <div class="row">
+        <label><span class="require">*</span>员工名称：</label>
+        <input type="text" placeholder="请输入名称" [(ngModel)]="epDetails.employee_name" name="name" required>
+      </div>
+      <div class="row">
+        <label><span class="require">*</span>性别：</label>
+        <select [(ngModel)]="epDetails.employee_sex" name="sex">
+            <option value="1">男</option>
+            <option value="0">女</option>
+        </select>
+      </div>
+      <div class="row">
+        <label><span class="require">*</span>是否在职：</label>
+        <select [(ngModel)]="epDetails.employee_state" name="state">
+            <option value="1">是</option>
+            <option value="0">否</option>
+        </select>
+      </div>
+      <div class="row">
+        <label><span class="require">*</span>联系电话：</label>
+        <input type="text" placeholder="请输入电话" [(ngModel)]="epDetails.employee_phone_number" name="phone" required>
+      </div>
+      <div class="row">
+        <label>成长值：</label>
+        <input type="text" placeholder="请输入成长值" [(ngModel)]="epDetails.employee_growth_value" name="growth" required>
+      </div>
+      <div class="row">
+        <label>员工等级：</label>
+        <input type="text" placeholder="请输入等级" [(ngModel)]="epDetails.employee_level" name="level" required>
+      </div>
+      <div class="row">
+        <label><span class="require">*</span>所属幼儿园：</label>
+        <select [(ngModel)]="employeesKg" name="kg">
+            <option *ngFor="let item of kgList" [ngValue]="item">{{item.kindergarten_name}}</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>是否管理员：</label>
+        <select [(ngModel)]="epDetails.employee_is_gm" name="gm">
+            <option value="1">是</option>
+            <option value="0">否</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>是否绑定微信：</label>
+        <select [(ngModel)]="epDetails.employee_wx_is_bind" name="wx">
+            <option value="1">是</option>
+            <option value="0">否</option>
+        </select>
+      </div>
+      <div class="row">
+        <label></label>
+        <a class="btn" (click)="addEp()" *ngIf="!isEdit" [class.disabled]="!infoReady">提交</a>
+        <a class="btn" (click)="editEp()" *ngIf="isEdit">确认编辑</a>
+        <a class="btn" (click)="backClicked()">取消</a>
+      </div>
+    </form>
+  </div>
+</div>

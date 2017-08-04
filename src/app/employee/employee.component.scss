@@ -1,3 +1,19 @@
 
 
+.operate{color:#3391e8;cursor: pointer;text-decoration: none;margin: 5px;white-space: nowrap}
+.operate.del{color:#D81B60 }
+
+.qrcode-box{
+    position: fixed;top:50%;left:50%;transform: translate(-50%,-50%);box-shadow: 1px 1px 1px #ccc;padding: 0;text-align:center;background:#fff;border:1px solid #ddd;
+    img{
+        width: 300px;height: 300px;
+    }
+    .info{
+        border-top:1px solid #ddd;padding: 6px;
+    }
+}
+
+.blur{filter: blur(5px);}
+
+
 
