@@ -22,19 +22,7 @@ import { GrowthComponent } from './growth/growth.component';
 import { RankComponent } from './rank/rank.component';
 import { MonthReportComponent } from './month-report/month-report.component';
 import { SysSettingComponent } from './sys-setting/sys-setting.component';
-import { EduComponent } from './manage/edu/edu.component';
-import { CertComponent } from './manage/cert/cert.component';
-import { SkillComponent } from './manage/skill/skill.component';
-import { PositionComponent } from './manage/position/position.component';
-import { DepartmentComponent } from './manage/department/department.component';
-import { ClassComponent } from './manage/class/class.component';
-import { EduDetailsComponent } from './manage/edu/edu-details/edu-details.component';
-import { CertDetailsComponent } from './manage/cert/cert-details/cert-details.component';
-import { ClassDetailsComponent } from './manage/class/class-details/class-details.component';
-import { SkillDetailsComponent } from './manage/skill/skill-details/skill-details.component';
-import { PositionDetailsComponent } from './manage/position/position-details/position-details.component';
-import { DepartmentDetailsComponent } from './manage/department/department-details/department-details.component';
-import { ItemComponent } from './manage/item/item.component';
+
 import { ManageComponent } from './manage/manage.component';
 import { DetailsComponent } from './manage/details/details.component';
 
@@ -91,19 +79,6 @@ const masterRoutes: Routes = [
     RankComponent,
     MonthReportComponent,
     SysSettingComponent,
-    EduComponent,
-    CertComponent,
-    SkillComponent,
-    PositionComponent,
-    DepartmentComponent,
-    ClassComponent,
-    EduDetailsComponent,
-    CertDetailsComponent,
-    ClassDetailsComponent,
-    SkillDetailsComponent,
-    PositionDetailsComponent,
-    DepartmentDetailsComponent,
-    ItemComponent,
     ManageComponent,
     DetailsComponent,
   ],
