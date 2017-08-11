@@ -10,8 +10,8 @@ import { UserService } from '../service/user.service';
 })
 export class LoginPageComponent implements OnInit {
 
-  private username: string;
-  private pass: string;
+  public username: string;
+  public pass: string;
 
   constructor(private userService: UserService, private router: Router, ) { }
 

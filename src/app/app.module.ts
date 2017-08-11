@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { MyDatePickerModule } from 'mydatepicker';
@@ -8,6 +8,8 @@ import { CookieModule } from 'ngx-cookie';
 import { AuthGuard } from './auth-guard';
 import { UserService } from './service/user.service';
 import { ExtendedHttpService } from './service/extend-http.service';
+import { ClickOutsideModule } from 'ng-click-outside';
+
 
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -25,6 +27,7 @@ import { SysSettingComponent } from './sys-setting/sys-setting.component';
 
 import { ManageComponent } from './manage/manage.component';
 import { DetailsComponent } from './manage/details/details.component';
+import { TestFormComponent } from './test-form/test-form.component';
 
 
 
@@ -81,11 +84,14 @@ const masterRoutes: Routes = [
     SysSettingComponent,
     ManageComponent,
     DetailsComponent,
+    TestFormComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
+    ClickOutsideModule,
     MyDatePickerModule,
     CookieModule.forRoot(),
     RouterModule.forRoot(appRoutes),

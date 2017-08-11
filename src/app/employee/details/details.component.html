@@ -46,6 +46,49 @@
         </select>
       </div>
       <div class="row">
+        <label>班组：</label>
+        <select [(ngModel)]="employeesClass" name="class">
+            <option *ngFor="let item of classList" [ngValue]="item">{{item.class_name}}</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>部门：</label>
+        <select [(ngModel)]="employeesDepartment" name="department">
+            <option *ngFor="let item of departmentList" [ngValue]="item">{{item.department_name}}</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>职位：</label>
+        <select [(ngModel)]="employeesPosition" name="position">
+            <option *ngFor="let item of positionList" [ngValue]="item">{{item.position_name}} ({{item.position_value}}点)</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>学历：</label>
+        <select [(ngModel)]="employeesBg" name="background">
+            <option *ngFor="let item of bgList" [ngValue]="item">{{item.educationalbackground_name}} ({{item.educationalbackground_value}}点)</option>
+        </select>
+      </div>
+      <div class="row">
+        <label>证书：</label>
+        <!-- <select [(ngModel)]="employeesCert" name="cert">
+            <option *ngFor="let item of certList" [ngValue]="item">{{item.certification_name}} ({{item.certification_value}}点)</option>
+        </select> -->
+        <div class="row-right">
+          <div class="float-item" *ngFor="let cert of certList;let i = index;">
+            <label><input type="checkbox" name="cert"  value="{{cert.certification_id}}"  (change)="changeCertCheckbox(i)" [checked]="cert.checked">{{cert.certification_name}} ({{cert.certification_value}}点)</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <label>技能：</label>
+        <div class="row-right">
+          <div class="float-item" *ngFor="let skill of skillList;let i = index;">
+            <label><input type="checkbox" name="skill"  value="{{skill.skill_id}}"  (change)="changeSkillCheckbox(i)" [checked]="skill.checked">{{skill.skill_name}} ({{skill.skill_value}}点)</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
         <label>是否管理员：</label>
         <select [(ngModel)]="epDetails.employee_is_gm" name="gm">
             <option value="1">是</option>

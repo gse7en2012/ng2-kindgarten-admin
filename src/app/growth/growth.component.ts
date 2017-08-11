@@ -12,7 +12,7 @@ import { GrowthService } from '../service/growth.service';
 export class GrowthComponent implements OnInit {
 
 
-  private myDatePickerOptions: IMyDpOptions = {
+  public myDatePickerOptions: IMyDpOptions = {
     // other options...
     dateFormat: 'yyyy-mm-dd',
     width: '210px',
@@ -69,6 +69,21 @@ export class GrowthComponent implements OnInit {
     if (this.page + 1 > Math.floor(this.rows / this.pageSize)) this.nextPageEnable = false;
     if (this.growthvalueList.length === 0) (this.prevPageEnable = false) && (this.nextPageEnable = false);
   }
+
+  prevPage() {
+    if (this.page > 1) {
+      this.page--;
+      this.searchGrowthList();
+    }
+  }
+  nextPage() {
+    if (this.page + 1 <= Math.floor(this.rows / this.pageSize)) {
+      this.page++;
+      this.searchGrowthList();
+    }
+  }
+
+
 
   onChange(v) {
     console.log(this.pageSize);

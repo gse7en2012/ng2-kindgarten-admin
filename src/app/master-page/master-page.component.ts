@@ -17,7 +17,10 @@ export class MasterPageComponent implements OnInit {
 
   ngOnInit() {
     this.setNavCurrent()
-    this.navMinHeight = (window.innerHeight - 60) + 'px';
+    const minHeight=(document.body.clientHeight>(window.innerHeight - 60))?document.body.clientHeight:(window.innerHeight - 60)
+    console.log(minHeight);
+    
+    this.navMinHeight = minHeight + 'px';
     this.activatedRoute.url.subscribe((params) => {
       console.log(params)
     });

@@ -5,13 +5,13 @@
 .ctx{max-width: 1400px;margin: 0 auto;font-size: 20px;line-height: 50px;padding-left: 10px;color: #f6f6f6;}
 
 .center-box{max-width: 1200px;margin:60px auto 0;overflow: hidden;max-width: 1400px;min-width: 800px;}
-.left-nav{width: 220px;float: left;background: #f6f7fb;border:1px solid #ddd;margin: 0;list-style: none;box-sizing: border-box;padding-left: 0;border-bottom:0;}
+.left-nav{width: 220px;float: left;background: #f6f7fb;border:1px solid #ddd;margin: 0;list-style: none;box-sizing: border-box;padding-left: 0;border-bottom:0;margin-bottom: -99999px;padding-bottom: 99999px;}
 .left-nav li{height: 40px;line-height: 40px;font-size: 14px;cursor: pointer;}
 .left-nav li a{display: block;height:100%;color: #666;text-decoration: none;padding-left: 20px;}
 .left-nav li a.cur{background: #3391e8;color: #fff;position: relative;z-index: 10;margin: 0 -1px;padding-left: 21px;}
 .left-nav li .sub-nav{padding-left: 65px;}
 .left-nav li .sub-nav.cur{padding-left: 66px;}
-.dashboard{padding:10px 20px;padding-left: 240px;border:1px solid #ddd;border-left:0;background: #fff;box-sizing: border-box;}
+.dashboard{padding:10px 20px;padding-left: 240px;border:1px solid #ddd;border-left:0;background: #fff;box-sizing: border-box;border-bottom: 0;}
 
 .nav-arrow{border: 6px solid transparent;border-left: 8px solid #7a7b7d;width: 0;height: 0px;font-size: 0;display: inline-block;position: relative;top: 0px;margin-left: 35px;transform-origin: 25% 50%;transition: all .12s ease-in-out;}
 .nav-arrow.rotate{transform: rotate(90deg)}

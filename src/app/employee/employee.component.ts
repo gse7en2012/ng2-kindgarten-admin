@@ -108,17 +108,19 @@ export class EmployeeComponent implements OnInit {
       });
   }
 
-  getWechatQrcodeTicket(employee) {
-    this.employeeService.getWechatQrcodeTicket(employee.employee_id).then((ticket) => {
-      this.codeUri = `https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=${encodeURIComponent(ticket)}`;
-      this.qrcodeShow = true;
-      this.currentEmployeeName = employee.employee_name;
-      this.currentEmployeeKg = employee.employee_kindergarten_name
+  getWechatQrcodeTicket(employee){
+    this.employeeService.getWechatQrcodeTicket(employee.employee_id).then((ticket)=>{
+      this.codeUri=`https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=${encodeURIComponent(ticket)}`;
+      this.qrcodeShow=true;
+      this.currentEmployeeName=employee.employee_name;
+      this.currentEmployeeKg=employee.employee_kindergarten_name
     })
   }
 
-  onClickedOutside(event) {
-    this.qrcodeShow = false;
+  onClickedOutside(event){
+    console.log(event);
+    
+    this.qrcodeShow=false;
   }
 
 

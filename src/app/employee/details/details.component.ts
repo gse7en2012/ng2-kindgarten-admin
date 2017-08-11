@@ -1,15 +1,16 @@
-import { Component, OnInit, OnChanges, ViewChild, AfterViewInit } from '@angular/core';
-import {Location} from '@angular/common';
+import { Component, OnInit, OnChanges, ViewChild, AfterViewInit, NgZone } from '@angular/core';
+import { Location } from '@angular/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { EmployeeService } from '../../service/employee.service';
 import { KgService } from '../../service/kg.service';
+import { ManageService } from '../../service/manage.service';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
-  providers: [EmployeeService, KgService]
+  providers: [EmployeeService, KgService, ManageService]
 })
 export class EmployeeDetailsComponent implements OnInit {
 
@@ -24,34 +25,80 @@ export class EmployeeDetailsComponent implements OnInit {
   };
   public infoReady: boolean = false;
   public kgList: any = [];
+  public classList: object[] = [];
+  public departmentList: any = [];
+  public bgList: any = [];
+  public positionList: any = [];
+  public skillList: any = [];
+  public certList: any = [];
   public employeesKg: any = {};
+  public employeesBg: any = {};
+  public employeesSkill: any = {};
+  public employeesClass: any = {};
+  public employeesCert: any = {};
+  public employeesDepartment: any = {};
+  public employeesPosition: any = {};
+
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private employeeService: EmployeeService,
     private kgService: KgService,
-    private myLocation:Location
+    private manageService: ManageService,
+    private myLocation: Location,
+    private _ngZone: NgZone
   ) { }
 
+  changeCheckbok(event) { // right now: ['1','3']
+    console.log(this.employeesSkill);
+  }
 
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.isEdit = params["eid"] ? true : false;
       this.eid = params['eid'];
       this.title = this.isEdit ? '编辑' : '添加';
-      this.kgService.getkgList().then((kgList) => {
-        this.kgList = kgList.kindergarten_list;
+
+
+      this.getManageList().then(() => {
         if (this.isEdit) {
           this.getEpDetails().then(() => {
             const kgId = this.epDetails.employee_kindergarten_id;
-            this.kgList.forEach((kg) => {
-              if (kg.kindergarten_id == kgId) this.employeesKg = kg;
+            this.employeesKg = this.kgList.find((item) => { return item.kindergarten_id == kgId; });
+            this.employeesBg = this.bgList.find((item) => { return item.educationalbackground_id == this.epDetails.employee_educationalbackground_id; });
+            // this.employeesSkill = this.skillList.find((item) => { return item.skill_id == this.epDetails.employee_; });
+            this.employeesClass = this.classList.find((item) => { return item['class_id'] == this.epDetails.employee_class_id; });
+            // this.employeesCert = this.certList.find((item) => { return item.certification_id == this.epDetails.employee_; });
+            this.employeesDepartment = this.departmentList.find((item) => { return item.department_id == this.epDetails.employee_department_id; });
+            this.employeesPosition = this.positionList.find((item) => { return item.position_id == this.epDetails.employee_position_id; });
+
+
+            this.epDetails.employee_certification_id_list.map((item) => item.employeehascertification_certification_id).forEach((selectId) => {
+              this.certList.forEach((item, index) => {
+                if (item.certification_id === selectId) item.checked = true;
+              })
             })
+
+            this.epDetails.employee_skill_id_list.map((item) => item.employeehasskill_skill_id).forEach((selectId) => {
+              this.skillList.forEach((item, index) => {
+                if (item.skill_id === selectId) item.checked = true;
+              })
+            })
+
           });
         }
-        if (!this.isEdit) this.employeesKg = this.kgList[0];
-      })
+        if (!this.isEdit) {
+          this.employeesKg = this.kgList[0];
+          this.employeesBg = this.bgList[0];
+          this.employeesClass = this.classList[0];
+          this.employeesSkill = [];
+          this.employeesCert = [];
+          this.employeesDepartment = this.departmentList[0];
+          this.employeesPosition = this.positionList[0];
+        }
+      });
+
     });
 
 
@@ -65,8 +112,8 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   backClicked() {
-        this.myLocation.back();
-    }
+    this.myLocation.back();
+  }
 
   getEpDetails() {
     return this.employeeService.getEmployeeDetails(Number(this.eid)).then((data) => {
@@ -74,6 +121,32 @@ export class EmployeeDetailsComponent implements OnInit {
     })
   }
 
+  getManageList() {
+    return Promise.all([
+      this.kgService.getkgList(),
+      this.manageService.getList('class'),
+      this.manageService.getList('department'),
+      this.manageService.getList('position'),
+      this.manageService.getList('skill'),
+      this.manageService.getList('cert'),
+      this.manageService.getList('edu')
+    ]).then((list) => {
+      this.kgList = list[0].kindergarten_list;
+      this.classList = list[1].class_list;
+      this.departmentList = list[2].department_list;
+      this.positionList = list[3].position_list;
+      this.skillList = list[4].skill_list;
+      this.certList = list[5].certification_list;
+      this.bgList = list[6].educationalbackground_list;
+    })
+  }
+
+  changeCertCheckbox(i) {
+    this.certList[i].checked = !this.certList[i].checked;
+  }
+  changeSkillCheckbox(i) {
+    this.skillList[i].checked = !this.skillList[i].checked;
+  }
 
   checkInfo(event) {
 
@@ -88,6 +161,8 @@ export class EmployeeDetailsComponent implements OnInit {
   addEp() {
     if (!this.infoReady) return;
 
+    const skillId = this.skillList.filter(opt => opt.checked).map(opt => opt.skill_id);
+    const certId = this.certList.filter(opt => opt.checked).map(opt => opt.certification_id);
     const epInfo = {
       employee_name: this.epDetails.employee_name,
       employee_phone_number: this.epDetails.employee_phone_number,
@@ -97,24 +172,15 @@ export class EmployeeDetailsComponent implements OnInit {
       employee_sex: this.epDetails.employee_sex,
       employee_state: this.epDetails.employee_state,
       employee_is_gm: this.epDetails.employee_is_gm,
-      employee_wx_is_bind: this.epDetails.employee_wx_is_bind
+      employee_wx_is_bind: this.epDetails.employee_wx_is_bind,
+      educationalbackground_id: this.employeesBg.educationalbackground_id,
+      certification_id_list: certId,
+      skill_id_list: skillId,
+      position_id: this.employeesPosition.position_id,
+      department_id: this.employeesDepartment.department_id,
+      class_id: this.employeesClass.class_id
     };
 
-    /**
-     * employee_realname:string(64), // 员工名称
-    employee_phone_number:string(16), // 员工联系电话
-    employee_wx_is_band:int, // 是否绑定了微信，0-否 1-是
-    employee_growth_value:int, // 成长值
-    employee_level:, // 员工等级
-    employee_wx_nickname:string(64), // 员工微信昵称
-    employee_kindergarten_id:int, // 所属幼儿园编号
-    employee_add_time:datetime, // 添加时间
-    employee_adder:string(64), // 添加者
-    employee_sex:int, // 员工性别，0-女 1-男 2-未知
-    employee_is_gm:int, // 是否为该幼儿园积分管理者，0-否 1-是
-    employee_state:int, // 是否在职，0-否 1-是
-    
-     */
 
 
 
@@ -127,7 +193,8 @@ export class EmployeeDetailsComponent implements OnInit {
   }
 
   editEp() {
-
+    const skillId = this.skillList.filter(opt => opt.checked).map(opt => opt.skill_id);
+    const certId = this.certList.filter(opt => opt.checked).map(opt => opt.certification_id);
     const epInfo = {
       employee_id: this.epDetails.employee_id,
       employee_name: this.epDetails.employee_name,
@@ -138,11 +205,17 @@ export class EmployeeDetailsComponent implements OnInit {
       employee_sex: this.epDetails.employee_sex,
       employee_state: this.epDetails.employee_state,
       employee_is_gm: this.epDetails.employee_is_gm,
-      employee_wx_is_bind: this.epDetails.employee_wx_is_bind
+      employee_wx_is_bind: this.epDetails.employee_wx_is_bind,
+       educationalbackground_id: this.employeesBg.educationalbackground_id,
+      certification_id_list: certId,
+      skill_id_list: skillId,
+      position_id: this.employeesPosition.position_id,
+      department_id: this.employeesDepartment.department_id,
+      class_id: this.employeesClass.class_id
     };
     this.employeeService.editEmployeeDetails(epInfo).then(data => {
       alert('修改成功！');
-       this.router.navigate(['/master/employee']);
+      this.router.navigate(['/master/employee']);
     }).catch(e => {
       alert(e)
     })

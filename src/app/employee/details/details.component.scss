@@ -1,0 +1,16 @@
+.form{
+    .row{
+        .float-item{
+            float: left;
+            label{
+                width: auto;min-height: auto;line-height: 24px;
+            }
+            input{
+                float: none;display: inline-block;width: auto;height:auto;margin-right: 4px;
+            }
+        }
+        .row-right{
+            float: left;width: 420px;padding-top: 6px;
+        }
+    }
+}

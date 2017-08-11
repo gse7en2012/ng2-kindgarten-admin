@@ -12,7 +12,7 @@ import { GrowthService } from '../service/growth.service';
 export class RankComponent implements OnInit {
 
 
-  private myDatePickerOptions: IMyDpOptions = {
+  public myDatePickerOptions = {
     // other options...
     dateFormat: 'yyyy-mm-dd',
     width: '210px',
@@ -70,6 +70,21 @@ export class RankComponent implements OnInit {
     if (this.rankList.length === 0) (this.prevPageEnable = false) && (this.nextPageEnable = false);
   }
 
+
+  prevPage() {
+    if (this.page > 1) {
+      this.page--;
+      this.searchRankList();
+    }
+  }
+  nextPage() {
+    if (this.page + 1 <= Math.floor(this.rows / this.pageSize)) {
+      this.page++;
+      this.searchRankList();
+    }
+  }
+
+  
   onChange(v) {
     this.searchRankList();
   }

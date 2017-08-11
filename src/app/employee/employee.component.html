@@ -3,72 +3,84 @@
   <div class="topbar-box">
     <a class="btn" [routerLink]="['details']"> +添加员工</a>
   </div>
+  <div class="content-box" [class.blur]="qrcodeShow">
+    <div class="search-box">
+      <label>搜索：</label>
+      <input type="text" [(ngModel)]="keyword">
+      <a class="search-btn" (click)="searchEmployee()"><span></span></a>
 
-  <div class="search-box">
-    <label>搜索：</label>
-    <input type="text" [(ngModel)]="keyword">
-    <a class="search-btn" (click)="searchEmployee()"><span></span></a>
-
-    <div class="fr">显示
-      <select [(ngModel)]="pageSize" (change)="onChange($event.target.value)">
+      <div class="fr">显示
+        <select [(ngModel)]="pageSize" (change)="onChange($event.target.value)">
         <option value="100">100</option>
         <option value="80">80</option>
         <option value="40">40</option>
       </select> 条
+      </div>
     </div>
-  </div>
 
-  <div class="result-box">
-    <table>
-      <tr>
-        <th>编号</th>
-        <th>姓名</th>
-        <th>性别</th>
-        <th>二维码</th>
-        <th>绑定微信</th>
-        <th>电话</th>
-        <th>在职</th>
-        <th>成长值</th>
-        <th>等级</th>
-        <!--<th>员工微信昵称</th>-->
-        <th>所属幼儿园</th>
-        <th>添加时间</th>
-        <th>添加者</th>
-        <th>操作</th>
-      </tr>
-      <tr *ngIf="employeeList.length==0">
-        <td colspan="13">没有搜索到对应结果</td>
-      </tr>
-      <tr *ngFor="let ep of employeeList">
-        <td>{{ep.employee_id}}</td>
-        <td>{{ep.employee_name}}</td>
-        <td>{{ep.employee_sex_s}}</td>
-        <td><a (click)="getWechatQrcodeTicket(ep)" class="operate">二维码</a></td>
-        <td>{{ep.employee_wx_is_bind_s}}</td>
-        <td>{{ep.employee_phone_number}}</td>
-        <td>{{ep.employee_state_s}}</td>
-        <td>{{ep.employee_growth_value}}</td>
-        <td>{{ep.employee_level}}</td>
-        <!--<td>{{ep.employee_wx_nickname}}</td>-->
-        <td>{{ep.employee_kindergarten_name}}</td>
-        <td>{{ep.employee_add_time}}</td>
-        <td>{{ep.employee_adder}}</td>
-        <td>
-          <a class="operate" [routerLink]="['details/'+ep.employee_id]">修改</a>
-          <a class="operate del" (click)="deleteEmployee(ep.employee_id)">删除</a>
-        </td>
-      </tr>
-    </table>
-    <div class="footer">
-      <div class="fl">显示{{startCount}}-{{endCount}}条，共{{rows}}条</div>
-      <div class="fr">
-        <div class="page">
-          <a class="prev page-item" (click)="prevPage()" [class.disabled]="!prevPageEnable"><span class="arrow"></span></a>
-          <a class="page-item" *ngFor="let p of pageButtons" [class.cur]="p.cur" (click)="jumpPage(p.num)">{{p.num}}</a>
-          <a class="next page-item" (click)="nextPage()" [class.disabled]="!nextPageEnable"><span class="arrow"></span></a>
+    <div class="result-box">
+      <table>
+        <tr>
+          <th>编号</th>
+          <th>姓名</th>
+          <th>性别</th>
+          <th>二维码</th>
+          <th>绑定微信</th>
+          <th>电话</th>
+          <th>在职</th>
+          <th>成长值</th>
+          <th>是否积分管理员</th>
+          <th>等级</th>
+          <!--<th>员工微信昵称</th>-->
+          <th>所属幼儿园</th>
+          <th>添加时间</th>
+          <th>添加者</th>
+          <th>操作</th>
+        </tr>
+        <tr *ngIf="employeeList.length==0">
+          <td colspan="13">没有搜索到对应结果</td>
+        </tr>
+        <tr *ngFor="let ep of employeeList">
+          <td>{{ep.employee_id}}</td>
+          <td>{{ep.employee_name}}</td>
+          <td>{{ep.employee_sex_s}}</td>
+          <td><a (click)="getWechatQrcodeTicket(ep)" class="operate">二维码</a></td>
+          <td>{{ep.employee_wx_is_bind_s}}</td>
+          <td>{{ep.employee_phone_number}}</td>
+          <td>{{ep.employee_state_s}}</td>
+          <td>{{ep.employee_growth_value}}</td>
+          <td>{{ep.employee_is_gm==1?'是':'否'}}</td>
+          <td>{{ep.employee_level}}</td>
+          <!--<td>{{ep.employee_wx_nickname}}</td>-->
+          <td>{{ep.employee_kindergarten_name}}</td>
+          <td>{{ep.employee_add_time}}</td>
+          <td>{{ep.employee_adder}}</td>
+          <td>
+            <a class="operate" [routerLink]="['details/'+ep.employee_id]">修改</a>
+            <a class="operate del" (click)="deleteEmployee(ep.employee_id)">删除</a>
+          </td>
+        </tr>
+      </table>
+      <div class="footer">
+        <div class="fl">显示{{startCount}}-{{endCount}}条，共{{rows}}条</div>
+        <div class="fr">
+          <div class="page">
+            <a class="prev page-item" (click)="prevPage()" [class.disabled]="!prevPageEnable"><span class="arrow"></span></a>
+            <a class="page-item" *ngFor="let p of pageButtons" [class.cur]="p.cur" (click)="jumpPage(p.num)">{{p.num}}</a>
+            <a class="next page-item" (click)="nextPage()" [class.disabled]="!nextPageEnable"><span class="arrow"></span></a>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="qrcode-box" (clickOutside)="onClickedOutside($event)" [hidden]="!qrcodeShow">
+    <img [src]="codeUri">
+    <div class="info">
+      <p>
+        姓名：{{currentEmployeeName}}<br> 所属幼儿园：{{currentEmployeeKg}}
+      </p>
+    </div>
+  </div>
+
 
 </div>
