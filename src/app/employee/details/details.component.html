@@ -14,21 +14,21 @@
         <input type="text" placeholder="请输入名称" [(ngModel)]="epDetails.employee_name" name="name" required>
       </div>
       <div class="row">
-        <label><span class="require">*</span>性别：</label>
+        <label>性别：</label>
         <select [(ngModel)]="epDetails.employee_sex" name="sex">
             <option value="1">男</option>
             <option value="0">女</option>
         </select>
       </div>
       <div class="row">
-        <label><span class="require">*</span>是否在职：</label>
+        <label>是否在职：</label>
         <select [(ngModel)]="epDetails.employee_state" name="state">
             <option value="1">是</option>
             <option value="0">否</option>
         </select>
       </div>
       <div class="row">
-        <label><span class="require">*</span>联系电话：</label>
+        <label>联系电话：</label>
         <input type="text" placeholder="请输入电话" [(ngModel)]="epDetails.employee_phone_number" name="phone" required>
       </div>
       <div class="row">
@@ -51,36 +51,36 @@
             <option *ngFor="let item of classList" [ngValue]="item">{{item.class_name}}</option>
         </select>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="departmentList.length>0">
         <label>部门：</label>
         <select [(ngModel)]="employeesDepartment" name="department">
             <option *ngFor="let item of departmentList" [ngValue]="item">{{item.department_name}}</option>
         </select>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="positionList.length>0">
         <label>职位：</label>
         <select [(ngModel)]="employeesPosition" name="position">
             <option *ngFor="let item of positionList" [ngValue]="item">{{item.position_name}} ({{item.position_value}}点)</option>
         </select>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="bgList.length>0">
         <label>学历：</label>
         <select [(ngModel)]="employeesBg" name="background">
             <option *ngFor="let item of bgList" [ngValue]="item">{{item.educationalbackground_name}} ({{item.educationalbackground_value}}点)</option>
         </select>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="certList.length>0">
         <label>证书：</label>
         <!-- <select [(ngModel)]="employeesCert" name="cert">
             <option *ngFor="let item of certList" [ngValue]="item">{{item.certification_name}} ({{item.certification_value}}点)</option>
         </select> -->
         <div class="row-right">
           <div class="float-item" *ngFor="let cert of certList;let i = index;">
-            <label><input type="checkbox" name="cert"  value="{{cert.certification_id}}"  (change)="changeCertCheckbox(i)" [checked]="cert.checked">{{cert.certification_name}} ({{cert.certification_value}}点)</label>
+            <label><input type="checkbox" name="cert"  value="{{cert.certification_id}}"  (change)="changeCertCheckbox(i)" [checked]="cert.checked">{{cert.certification_name}} ({{cert.certification_value}}点)</label> 
           </div>
         </div>
       </div>
-      <div class="row">
+      <div class="row" *ngIf="skillList.length>0">
         <label>技能：</label>
         <div class="row-right">
           <div class="float-item" *ngFor="let skill of skillList;let i = index;">
@@ -97,10 +97,11 @@
       </div>
       <div class="row">
         <label>是否绑定微信：</label>
-        <select [(ngModel)]="epDetails.employee_wx_is_bind" name="wx">
+        <p>{{epDetails.employee_wx_is_bind==1?'是':'否'}}</p>
+        <!-- <select [(ngModel)]="epDetails.employee_wx_is_bind" name="wx">
             <option value="1">是</option>
             <option value="0">否</option>
-        </select>
+        </select> -->
       </div>
       <div class="row">
         <label></label>

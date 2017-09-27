@@ -13,7 +13,7 @@ export class MasterPageComponent implements OnInit {
   public navMinHeight: string;
   public adminInfo:any;
 
-  constructor(private activatedRoute: ActivatedRoute,private userService:UserService) { }
+  constructor(private activatedRoute: ActivatedRoute,private userService:UserService,private router:Router) { }
 
   ngOnInit() {
     this.setNavCurrent()
@@ -41,4 +41,8 @@ export class MasterPageComponent implements OnInit {
 
   }
 
+  logout(){
+    this.userService.logOut();
+    this.router.navigate(['/login']);
+  }
 }

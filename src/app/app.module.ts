@@ -28,7 +28,8 @@ import { SysSettingComponent } from './sys-setting/sys-setting.component';
 import { ManageComponent } from './manage/manage.component';
 import { DetailsComponent } from './manage/details/details.component';
 import { TestFormComponent } from './test-form/test-form.component';
-
+import { GrowthTplComponent } from './growth-tpl/growth-tpl.component';
+import { GrowthTplDetailsComponent } from './growth-tpl/details/details.component';
 
 
 const appRoutes: Routes = [
@@ -51,7 +52,12 @@ const masterRoutes: Routes = [
 
       { path: 'manage/:item', component: ManageComponent },
       { path: 'manage/:item/details', component: DetailsComponent },
-      { path: 'manage/:item/details/:eid', component: DetailsComponent }
+      { path: 'manage/:item/details/:eid', component: DetailsComponent },
+
+      { path: 'growth_item', component: GrowthTplComponent },
+      { path: 'growth_item/details', component: GrowthTplDetailsComponent },
+      { path: 'growth_item/details/:eid', component: GrowthTplDetailsComponent },
+
       // { path: 'manage/edu', component: EduComponent },
       // { path: 'manage/edu/details', component: EduDetailsComponent },
       // { path: 'manage/edu/details/:eid', component: EduDetailsComponent },
@@ -85,6 +91,8 @@ const masterRoutes: Routes = [
     ManageComponent,
     DetailsComponent,
     TestFormComponent,
+    GrowthTplComponent,
+    GrowthTplDetailsComponent
   ],
   imports: [
     BrowserModule,

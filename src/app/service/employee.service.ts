@@ -129,4 +129,17 @@ export class EmployeeService {
   }
 
 
+  public setEmployeeUsableValue(eId,val){
+    const postData = this.generateHttpPostSearchParams({ 
+      employee_id: eId ,
+      value:val
+    })
+    return this.http.put(`/gmapi/usable_value`, postData)
+      .map(res => res.json()).toPromise()
+      .then((data) => {
+        return data;
+      })
+  }
+
+
 }

@@ -79,7 +79,7 @@ export class ManageComponent implements OnInit {
     this.nextPageEnable = true;
     this.prevPageEnable = true;
     if (this.page <= 1) this.prevPageEnable = false;
-    if (this.page + 1 > Math.floor(this.rows / this.pageSize)) this.nextPageEnable = false;
+    if (this.page >= Math.ceil(this.rows / this.pageSize)) this.nextPageEnable = false;
     if (this.list.length === 0) (this.prevPageEnable = false) && (this.nextPageEnable = false);
   }
 
@@ -95,7 +95,7 @@ export class ManageComponent implements OnInit {
   }
 
   nextPage() {
-    if (this.page + 1 <= Math.floor(this.rows / this.pageSize)) {
+    if (this.page + 1 <= Math.ceil(this.rows / this.pageSize)) {
       this.page++;
       this.getList();
     }
@@ -111,8 +111,7 @@ export class ManageComponent implements OnInit {
   renderPageButtons() {
     this.pageButtons = [];
     const hasPrveBtn = this.page - 1 > 0;
-    const hasNextBtn = this.page + 1 <= Math.floor(this.rows / this.pageSize);
-
+    const hasNextBtn = this.page + 1 <= Math.ceil(this.rows / this.pageSize);
     if (hasPrveBtn) this.pageButtons.push({ cur: false, num: this.page - 1 })
     if (true) this.pageButtons.push({ cur: true, num: this.page })
     if (hasNextBtn) this.pageButtons.push({ cur: false, num: this.page + 1 })

@@ -44,7 +44,7 @@ export class GrowthService {
   public getGrowthValueList(page?: number, size?: number, keyword?: string, start_time?: string, end_time?: string) {
 
     const param = this.generateHttpGetSearchParams({
-      page: page, size: size, keyword: keyword,start_time:start_time,end_time:end_time
+      page: page, size: size, keyword: keyword, start_time: start_time, end_time: end_time
     })
 
     return this.http.get(`/gmapi/growthvalue_record?access_token=${param.token}`, { search: param.search }).map(res => res.json()).toPromise()
@@ -57,10 +57,88 @@ export class GrowthService {
       })
   }
 
+  public getGrowthValueTplList(page?: number, size?: number, keyword?: string, start_time?: string, end_time?: string) {
+    const param = this.generateHttpGetSearchParams({
+      page: page, size: size, keyword: keyword, start_time: start_time, end_time: end_time
+    })
+
+    return this.http.get(`/gmapi/growthvalueitem_list?access_token=${param.token}`, { search: param.search }).map(res => res.json()).toPromise()
+      .then((data) => {
+        if (data.err_code === 200) {
+          return data.result;
+        } else {
+          return Promise.reject(data.msg || '返回数据格式出错！');
+        }
+      })
+  }
+
+  public getGrowthValueTplDetails(eId) {
+    const paramObject: object = {};
+    paramObject['kgsgrowthvalueitem_id'] = eId;
+    const param = this.generateHttpGetSearchParams(paramObject);
+    return this.http.get(`/gmapi/growthvalueitem?access_token=${param.token}`, { search: param.search })
+      .map(res => res.json())
+      .toPromise()
+      .then((data) => {
+        if (data.err_code === 200) {
+          return data.result;
+        } else {
+          return Promise.reject(data.msg || '返回数据格式出错！');
+        }
+      })
+  }
+
+  public addGrowthValueTplDetails( detailsInfo: object) {
+    const paramObject: object = {};
+    paramObject[`growthvalueitem_info`] = detailsInfo;
+    const postData = this.generateHttpPostSearchParams(paramObject)
+    return this.http.post(`/gmapi/growthvalueitem`, postData)
+      .map(res => res.json()).toPromise()
+      .then((data) => {
+        if (data.err_code === 200) {
+          return data.result;
+        } else {
+          return Promise.reject(data.msg || '返回数据格式出错！');
+        }
+      })
+  }
+
+  public editGrowthValueTplDetails(detailsInfo: object) {
+    const paramObject: object = {};
+    paramObject[`growthvalueitem_info`] = detailsInfo;
+    const postData = this.generateHttpPostSearchParams(paramObject)
+    return this.http.put(`/gmapi/growthvalueitem`, postData)
+      .map(res => res.json()).toPromise()
+      .then((data) => {
+        if (data.err_code === 200) {
+          return data.result;
+        } else {
+          return Promise.reject(data.msg || '返回数据格式出错！');
+        }
+      })
+  }
+
+  public deleteGrowthValueTplDetails(eId) {
+    const paramObject: object = {};
+    paramObject[`growthvalueitem_list`] = [eId];
+    const postData = this.generateHttpPostSearchParams(paramObject)
+    return this.http.delete(`/gmapi/growthvalueitem`, new RequestOptions({ body: postData }))
+      .map(res => res.json()).toPromise()
+      .then((data) => {
+        if (data.err_code === 200) {
+          return data.result;
+        } else {
+          return Promise.reject(data.msg || '返回数据格式出错！');
+        }
+      })
+  }
+
+
+
   public getRankList(page?: number, size?: number, keyword?: string, start_time?: string, end_time?: string) {
 
     const param = this.generateHttpGetSearchParams({
-      page: page, size: size, keyword: keyword,start_time:start_time,end_time:end_time
+      page: page, size: size, keyword: keyword, start_time: start_time, end_time: end_time
     })
 
     return this.http.get(`/gmapi/ranking?access_token=${param.token}`, { search: param.search }).map(res => res.json()).toPromise()

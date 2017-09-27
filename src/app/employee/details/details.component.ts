@@ -154,7 +154,7 @@ export class EmployeeDetailsComponent implements OnInit {
       this.infoReady = true;
     }
     if (!this.isEdit) {
-      this.infoReady = !!(event.name && event.phone && event.sex && event.state && event.kg);
+      this.infoReady = !!(event.name && event.kg);
     }
   }
 
@@ -173,12 +173,12 @@ export class EmployeeDetailsComponent implements OnInit {
       employee_state: this.epDetails.employee_state,
       employee_is_gm: this.epDetails.employee_is_gm,
       employee_wx_is_bind: this.epDetails.employee_wx_is_bind,
-      educationalbackground_id: this.employeesBg.educationalbackground_id,
+      educationalbackground_id: this.employeesBg?this.employeesBg.educationalbackground_id:null,
       certification_id_list: certId,
       skill_id_list: skillId,
-      position_id: this.employeesPosition.position_id,
-      department_id: this.employeesDepartment.department_id,
-      class_id: this.employeesClass.class_id
+      position_id: this.employeesPosition?this.employeesPosition.position_id:null,
+      department_id:this.employeesDepartment?this.employeesDepartment.department_id:null,
+      class_id: this.employeesClass?this.employeesClass.class_id:null
     };
 
 
@@ -206,12 +206,12 @@ export class EmployeeDetailsComponent implements OnInit {
       employee_state: this.epDetails.employee_state,
       employee_is_gm: this.epDetails.employee_is_gm,
       employee_wx_is_bind: this.epDetails.employee_wx_is_bind,
-       educationalbackground_id: this.employeesBg.educationalbackground_id,
+      educationalbackground_id: this.employeesBg?this.employeesBg.educationalbackground_id:null,
       certification_id_list: certId,
       skill_id_list: skillId,
-      position_id: this.employeesPosition.position_id,
-      department_id: this.employeesDepartment.department_id,
-      class_id: this.employeesClass.class_id
+      position_id: this.employeesPosition?this.employeesPosition.position_id:null,
+      department_id:this.employeesDepartment?this.employeesDepartment.department_id:null,
+      class_id: this.employeesClass?this.employeesClass.class_id:null
     };
     this.employeeService.editEmployeeDetails(epInfo).then(data => {
       alert('修改成功！');

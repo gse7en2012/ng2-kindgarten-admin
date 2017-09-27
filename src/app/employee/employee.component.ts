@@ -26,6 +26,7 @@ export class EmployeeComponent implements OnInit {
   public prevPageEnable: boolean = false;
   public qrcodeShow: boolean = false;
   public codeUri: string = 'https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=130767599,487081351&fm=58';
+  public isEditing: boolean = false;
 
   constructor(private employeeService: EmployeeService) { }
 
@@ -70,7 +71,7 @@ export class EmployeeComponent implements OnInit {
     }
   }
   onChange(v) {
-    console.log(this.pageSize);
+
     this.searchEmployee();
   }
 
@@ -108,20 +109,36 @@ export class EmployeeComponent implements OnInit {
       });
   }
 
-  getWechatQrcodeTicket(employee){
-    this.employeeService.getWechatQrcodeTicket(employee.employee_id).then((ticket)=>{
-      this.codeUri=`https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=${encodeURIComponent(ticket)}`;
-      this.qrcodeShow=true;
-      this.currentEmployeeName=employee.employee_name;
-      this.currentEmployeeKg=employee.employee_kindergarten_name
+  getWechatQrcodeTicket(employee) {
+    this.employeeService.getWechatQrcodeTicket(employee.employee_id).then((ticket) => {
+      this.codeUri = `https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=${encodeURIComponent(ticket)}`;
+      this.qrcodeShow = true;
+      this.currentEmployeeName = employee.employee_name;
+      this.currentEmployeeKg = employee.employee_kindergarten_name
     })
   }
 
-  onClickedOutside(event){
-    console.log(event);
-    
-    this.qrcodeShow=false;
+  onClickedOutside(event) {
+    this.qrcodeShow = false;
   }
 
+  doubleClickUsableValue(ep) {
+    ep.editabled = true;
+
+  }
+  doubleClickUsableValueClickedOutside(ep) {
+    if (ep.editabled) {
+      console.log(ep);
+
+      this.employeeService.setEmployeeUsableValue(ep.employee_id, ep.employee_usable_value).then(() => {
+        ep.editabled = false;
+        // alert('修改成功！')
+      })
+    }
+    // this.employeeService.setEmployeeUsableValue(ep.employee_id,ep.employee_usable_value).then(()=>{
+    //   ep.editabled=false;
+    //   alert('修改成功！')
+    // })
+  }
 
 }

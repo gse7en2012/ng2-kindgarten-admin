@@ -36,6 +36,11 @@ export class UserService {
       })
   }
 
+  public logOut(){
+    this.cookieService.remove('kg_gm_token');
+    this.cookieService.remove('kg_gm_info');
+  }
+
   public checkAdminLogin() {
     return !!this.cookieService.get('kg_gm_token');
   }

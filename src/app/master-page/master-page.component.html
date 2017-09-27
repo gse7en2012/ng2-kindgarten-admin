@@ -3,7 +3,9 @@
     <div class="ctx">
       MEM自组织员工管理后台
       <div class="admin-info">
-        系统管理员 {{adminInfo.kindergartengm_name}}<span class="arrow"></span>
+        系统管理员 {{adminInfo.kindergartengm_name}}，
+        <a href="javascript:;" (click)="logout()" class="log-out">退出登录</a>
+        <!-- <span class="arrow"></span> -->
       </div>
     </div>
 
@@ -18,6 +20,9 @@
       </li>
       <li>
         <a [routerLink]="['/master/growth']" routerLinkActive="cur"><i class="icon growth"></i>成长值记录</a>
+      </li>
+      <li>
+        <a [routerLink]="['/master/growth_item']" routerLinkActive="cur"><i class="icon growth"></i>成长值自定义项</a>
       </li>
       <li>
         <a [routerLink]="['/master/rank']" routerLinkActive="cur"><i class="icon rank"></i>排名查询</a>

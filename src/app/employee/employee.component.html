@@ -29,6 +29,7 @@
           <th>电话</th>
           <th>在职</th>
           <th>成长值</th>
+          <th width="90">可用积分</th>
           <th>是否积分管理员</th>
           <th>等级</th>
           <!--<th>员工微信昵称</th>-->
@@ -49,6 +50,10 @@
           <td>{{ep.employee_phone_number}}</td>
           <td>{{ep.employee_state_s}}</td>
           <td>{{ep.employee_growth_value}}</td>
+          <td (dblclick)="doubleClickUsableValue(ep)" (clickOutside)="doubleClickUsableValueClickedOutside(ep)">
+            <span [hidden]="ep.editabled">{{ep.employee_usable_value}}</span>
+            <input [hidden]="!ep.editabled" class="edit-input" [(ngModel)]="ep.employee_usable_value">
+          </td>
           <td>{{ep.employee_is_gm==1?'是':'否'}}</td>
           <td>{{ep.employee_level}}</td>
           <!--<td>{{ep.employee_wx_nickname}}</td>-->
